@@ -69,7 +69,17 @@ function drawFood(){
     ctx.fillStyle = foodColor;
     ctx.fillRect(foodX, foodY, unitSize, unitSize);
 };
-function moveSnake(){};
+function moveSnake(){
+    const head = {  x: snake[0].x + yVelocity,
+                    y: snake[0].y + yVelocity};
+    snake.unshift(head);
+    // if food is eaten
+    if(snake[0].x == foodX && snake[0].y == foodY){
+        score+=1
+        scoreText.textContent= score;
+        createFood();
+    }
+};
 function drawSnake(){
     ctx.fillStyle = snakeColor;
     ctx.strokeStyle = snakeBorder;
@@ -78,7 +88,27 @@ function drawSnake(){
         ctx.strokeRect(snakePart.x, snakePart.y, unitSize, unitSize);
     })
 };
-function changeDirection(){};
+function changeDirection(){
+    const keyPressed = keyboardevent.keycode;
+    const left = 37;
+    const up = 38;
+    const right = 39;
+    const down = 40
+
+    const goingUp = (yVelocity == -unitSize);
+    const goingDown = (yVelocity == unitSize);
+    const goingright= (xVelocity == unitSize);
+    const goingLeft = (xVelocity == -unitSize);
+    
+    switch(true){
+        case(keyPressed == left && !goingRight):
+            xVelocity = -unitSize
+            yVelocity = 0;
+            break;
+        
+    }
+
+};
 function checkGameOver(){};
 function displayGameOver(){};
 function resetGame(){};
